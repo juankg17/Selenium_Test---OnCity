@@ -107,7 +107,7 @@ public class SearchResult_Test extends TestBase{
     @Test
     @Order(14)
     public void clickFinalizarCompra() throws Exception {
-        //checkOutPage.clickFinalizarCompra();
+        checkOutPage.clickFinalizarCompra();
     }
 
 }
