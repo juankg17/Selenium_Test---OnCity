@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Mensajes de Error para Pruebas</title>
+    <style>
+        /* Estilos básicos */
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        form { max-width: 450px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], 
+        input[type="email"], 
+        input[type="number"], 
+        input[type="password"] {
+            width: calc(100% - 10px); /* Ajuste para padding */
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background-color: #28a745; 
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            background-color: #1e7e34;
+        }
+        /* Estilos para mensajes */
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 2px;
+            display: block; /* Asegura que ocupe su propia línea */
+        }
+        .success-message {
+            color: green;
+            font-size: 1.1em;
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid green;
+            background-color: #e6ffe6;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="registroForm" onsubmit="return validarFormulario(event)">
+        <h2>Registro de Usuario</h2>
+        
+        <div class="form-group">
+            <label for="nombreCompleto" class="required">Nombre completo</label>
+            <input type="text" id="nombreCompleto" name="nombreCompleto" required>
+            <p id="error-nombreCompleto" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="required">Email</label>
+            <input type="email" id="email" name="email" required>
+            <p id="error-email" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="edad">Edad (opcional)</label>
+            <input type="number" id="edad" name="edad" step="1">
+            <p id="error-edad" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="contrasena" class="required">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" required minlength="6">
+            <p id="error-contrasena" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="repetirContrasena" class="required">Repetir Contraseña</label>
+            <input type="password" id="repetirContrasena" name="repetirContrasena" required>
+            <p id="error-repetirContrasena" class="error-message"></p>
+        </div>
+        
+        <button type="submit" class="submit-btn">Enviar Formulario</button>
+
+        <div id="mensajeExito" class="success-message" style="display: none;"></div>
+    </form>
+
+    <script>
+        function mostrarError(idCampo, mensaje) {
+            document.getElementById('error-' + idCampo).textContent = mensaje;
+        }
+
+        function limpiarErrores() {
+            const errores = document.querySelectorAll('.error-message');
+            errores.forEach(el => el.textContent = '');
+            document.getElementById('mensajeExito').style.display = 'none';
+        }
+
+        function validarFormulario(event) {
+            event.preventDefault(); // Detener el envío por defecto para JS
+            limpiarErrores();
+            let esValido = true;
+            
+            const nombre = document.getElementById('nombreCompleto').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const edad = document.getElementById('edad').value.trim();
+            const contrasena = document.getElementById('contrasena').value;
+            const repetirContrasena = document.getElementById('repetirContrasena').value;
+
+            // 1. Validación de Nombre (Obligatorio)
+            if (nombre === '') {
+                mostrarError('nombreCompleto', 'El nombre completo es obligatorio.');
+                esValido = false;
+            }
+
+            // 2. Validación de Email (Obligatorio y Formato)
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                mostrarError('email', 'El email es obligatorio.');
+                esValido = false;
+            } else if (!regexEmail.test(email)) {
+                mostrarError('email', 'Por favor, introduce un email válido.');
+                esValido = false;
+            }
+
+            // 3. Validación de Edad (Opcional, Positivo si se completa)
+            if (edad !== '') {
+                const edadNum = parseInt(edad);
+                if (isNaN(edadNum) || edadNum < 1) {
+                    mostrarError('edad', 'La edad debe ser mayor a 0.');
+                    esValido = false;
+                }
+            }
+
+            // 4. Validación de Contraseña (Obligatoria, Mínimo 6)
+            if (contrasena.length < 6) {
+                mostrarError('contrasena', 'La contraseña debe tener un mínimo de 6 caracteres.');
+                esValido = false;
+            }
+
+            // 5. Validación de Repetir Contraseña (Coincidencia)
+            if (repetirContrasena !== contrasena) {
+                mostrarError('repetirContrasena', 'Las contraseñas no coinciden.');
+                esValido = false;
+            }
+
+            // --- Resultado Final ---
+            if (esValido) {
+                // Mostrar mensaje de éxito personalizado
+                const mensajeExito = document.getElementById('mensajeExito');
+                mensajeExito.innerHTML = `Registro exitoso. Bienvenido/a, ${nombre}!`;
+                mensajeExito.style.display = 'block';
+                // Opcional: limpiar los campos después del éxito
+                // document.getElementById('registroForm').reset(); 
+            }
+            
+            return false; // Prevenir el envío real del formulario en este ejemplo
+        }
+    </script>
+
+</body>
+</html>
