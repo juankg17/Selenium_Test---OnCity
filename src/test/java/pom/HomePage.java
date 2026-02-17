@@ -32,6 +32,8 @@ public class HomePage extends BasePage{
 
     // Hace click en buscar
     public void clickSearchBoton() throws Exception {
+        waitUntilVisibilityOfElement(botonSearchTextLocator);
+        waitUntilElementToBeClickable(botonSearchTextLocator);
         click(botonSearchTextLocator);
     }
 
