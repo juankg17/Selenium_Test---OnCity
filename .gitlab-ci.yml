@@ -1,0 +1,24 @@
+image: eclipse-temurin:25-jdk
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - test
+
+selenium_test:
+  stage: test
+  before_script:
+    # Instalación de Chrome para Linux
+    - apt-get update -qq && apt-get install -y -qq wget gnupg
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-archive-keyring.gpg
+    - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+    - apt-get update -qq && apt-get install -y -qq google-chrome-stable
+    - chmod +x mvnw
+  script:
+    # Ejecutamos con el wrapper y los parámetros de CI
+    - ./mvnw clean test -Dtest=Selenium_Test.SearchResult_Test
