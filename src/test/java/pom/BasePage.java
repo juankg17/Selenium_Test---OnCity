@@ -1,12 +1,11 @@
 package pom;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
@@ -116,5 +115,17 @@ public class BasePage {
         element.clear();
         element.sendKeys(input);
         //driver.findElement(locator).sendKeys(input);
+    }
+
+    public void takeScreenshot(String name) {
+        try {
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            // La ruta debe coincidir con lo que pusimos en el YAML
+            String path = "target/surefire-reports/screenshot_" + name + ".png";
+            FileUtils.copyFile(scrFile, new File(path));
+            System.out.println("Screenshot guardada en: " + path);
+        } catch (Exception e) {
+            System.out.println("No se pudo tomar la captura: " + e.getMessage());
+        }
     }
 }
