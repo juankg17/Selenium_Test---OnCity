@@ -30,7 +30,7 @@ public class ChromeDriverManager extends DriverManager {
             System.out.println("Ejecutando en modo LOCAL con interfaz gráfica");
             // Aquí puedes agregar opciones locales si quieres, como maximizar
             options.addArguments("--start-maximized");
-            System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver/chromedriver.exe");
+            //System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver/chromedriver.exe");
             driver = new ChromeDriver(options);
         }
 
