@@ -24,6 +24,11 @@ public class ChromeDriverManager extends DriverManager {
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
+
+            // ESTO ES CLAVE: Engañamos a la web para que crea que es un Windows real
+            options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36");
+            options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+
             System.out.println("Ejecutando en modo HEADLESS (CI detectado)");
             driver = new ChromeDriver(options);
         } else {
