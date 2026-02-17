@@ -1,6 +1,7 @@
 package pom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -94,8 +95,22 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    // Espera a que el elemento sea clickeable
+    public void waitUntilElementToBeClickable(By locator){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     public void type(String input, By locator){
         waitUntilVisibilityOfElement(locator);
+        waitUntilElementToBeClickable(locator);
+        try {
+            BasePage.this.click(locator);
+        } catch (Exception e) {
+            // Si el click normal falla, usamos JavaScript para forzar el foco
+            ((JavascriptExecutor) driver).executeScript("arguments[0].focus();", locator);
+        }
+
         driver.findElement(locator).sendKeys(input);
     }
 }
