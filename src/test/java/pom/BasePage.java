@@ -95,6 +95,7 @@ public class BasePage {
     }
 
     public void type(String input, By locator){
+        waitUntilVisibilityOfElement(locator);
         driver.findElement(locator).sendKeys(input);
     }
 }
