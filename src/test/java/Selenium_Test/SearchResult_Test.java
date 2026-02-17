@@ -25,6 +25,7 @@ public class SearchResult_Test extends TestBase{
     public void searchProduct() throws InterruptedException {
         homePage.takeScreenshot("HOME_START");
         homePage.searchProduct(homePage.getProductoSearch());
+        homePage.takeScreenshot("HOME_Finish");
     }
 
     @Test
