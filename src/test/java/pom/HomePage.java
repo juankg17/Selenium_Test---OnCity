@@ -2,6 +2,11 @@ package pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage extends BasePage{
 
@@ -65,6 +70,27 @@ public class HomePage extends BasePage{
     public void clickFinalCheckOut() throws Exception {
         waitUntilVisibilityOfElement(finalCheckOutLocator);
         click(finalCheckOutLocator);
+    }
+
+    public void cerrarModalUbicacion() {
+        try {
+            // Esperamos máximo 5 segundos a que el botón aparezca
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+            // Usamos el texto para que sea más legible y estable
+            By locatorMasTarde = By.xpath("//button[contains(text(), 'Más tarde')]");
+
+            WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(locatorMasTarde));
+            btn.click();
+
+            // Esperamos un momento a que el modal desaparezca visualmente
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(locatorMasTarde));
+
+            System.out.println("✅ Modal de ubicación cerrado exitosamente.");
+        } catch (Exception e) {
+            // Si no aparece, imprimimos en el log de GitLab para saber qué pasó
+            System.out.println("⚠️ El modal de ubicación no apareció o ya estaba cerrado: " + e.getMessage());
+        }
     }
 
     public HomePage(WebDriver driver){
