@@ -6,6 +6,8 @@ variables:
 cache:
   paths:
     - .m2/repository
+  policy: pull-push # Asegura que siempre intente leer y escribir
+  when: always      # Guarda el caché aunque el test falle
 
 stages:
   - test
