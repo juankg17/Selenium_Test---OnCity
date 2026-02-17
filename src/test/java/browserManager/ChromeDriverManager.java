@@ -28,6 +28,7 @@ public class ChromeDriverManager extends DriverManager {
             // ESTO ES CLAVE: Engañamos a la web para que crea que es un Windows real
             options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36");
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+            options.addArguments("--lang=es-AR"); // Le dice a Chrome que actúa como si estuviese en Argentina
 
             System.out.println("Ejecutando en modo HEADLESS (CI detectado)");
             driver = new ChromeDriver(options);
