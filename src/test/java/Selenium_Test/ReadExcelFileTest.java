@@ -30,7 +30,9 @@ public class ReadExcelFileTest {
     @Test
     public void mostrarSheet() throws IOException {
         String projectPath = System.getProperty("user.dir");
-        String path = projectPath + "\\src\\test\\resources\\excelfiles\\Usuarios.xlsx";
+        //String path = projectPath + "\\src\\test\\resources\\excelfiles\\Usuarios.xlsx";
+        // Se cambia orientación de la barra para que lo tome desde la mac
+        String path = projectPath + "/src/test/resources/excelfiles/Usuarios.xlsx";
         XSSFSheet sheet = readExcelFile.getSheet(path,"Hoja1");
 
         int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum();
