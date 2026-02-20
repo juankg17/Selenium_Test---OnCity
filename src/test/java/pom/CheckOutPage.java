@@ -31,6 +31,7 @@ public class CheckOutPage extends BasePage{
 
     public void clickFinalizarCompra() throws Exception {
         waitUntilVisibilityOfElement(btnFinalizarCompra);
+        waitUntilElementToBeClickable(btnFinalizarCompra);
         click(btnFinalizarCompra);
     }
 
