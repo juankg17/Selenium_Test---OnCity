@@ -29,7 +29,7 @@ public class CheckOutPage extends BasePage{
     private By dateToSelect = By.xpath("//div[@aria-label='day-20']");
     private By btnContinuarPago = By.id("btn-go-to-payment");
     //private By btnFinalizarCompra = By.xpath("//span[normalize-space()='Finalizar Compra']");
-    private By btnFinalizarCompra = By.xpath("//*[contains(text(), 'inalizar') and contains(text(), 'ompra')]");
+    private By btnFinalizarCompra = By.xpath("//*[contains(@class, 'jsSubmitFakeButton btn btn-success btn-large btn-block')");
 
     public void clickFinalizarCompra() throws Exception {
         waitUntilVisibilityOfElement(btnFinalizarCompra);
