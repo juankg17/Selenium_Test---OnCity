@@ -12,7 +12,8 @@ public class HomePage extends BasePage{
 
     private String homeTitle = "On City – Comprá Online con Envío Rápido y Retiro Gratis en Tienda";
     private String productoSearch = "Notebook Hp 15-Fd0155la Intel Core I5";
-    private By searchTextLocator = By.xpath("(//input[@id='downshift-0-input'])");
+    //private By searchTextLocator = By.xpath("(//input[@id='downshift-0-input'])");
+    private By searchTextLocator = By.xpath("//input[contains(@placeholder, 'Encontrá lo que buscás')]");
     private By botonSearchTextLocator = By.xpath("//button[@aria-label='Buscar Productos']");
     private By notebookLocator = By.xpath("//span[contains(@class, 'vtex-product-summary-2-x-productBrand') and contains(text(), 'Notebook Hp 15-Fd0155la Intel Core I5')]");
     private By botonAddCartLocator = By.xpath("//span[contains(@class, 'vtex-add-to-cart-button-0-x-buttonText') and contains (text(), 'Sumalo al carrito')]");
