@@ -1,6 +1,7 @@
 package pom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -27,12 +28,22 @@ public class CheckOutPage extends BasePage{
     private By btnElijaFecha = By.id("scheduled-delivery-choose-Llega-en 24 hrs");
     private By dateToSelect = By.xpath("//div[@aria-label='day-20']");
     private By btnContinuarPago = By.id("btn-go-to-payment");
-    private By btnFinalizarCompra = By.xpath("//span[normalize-space()='Finalizar Compra']");
+    //private By btnFinalizarCompra = By.xpath("//span[normalize-space()='Finalizar Compra']");
+    private By btnFinalizarCompra = By.xpath("//*[contains(text(), 'inalizar') and contains(text(), 'ompra')]");
 
     public void clickFinalizarCompra() throws Exception {
         waitUntilVisibilityOfElement(btnFinalizarCompra);
-        waitUntilElementToBeClickable(btnFinalizarCompra);
-        click(btnFinalizarCompra);
+
+        // 3. Scroll forzado (Crucial en Checkout de VTEX)
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btnFinalizarCompra);
+
+        // 4. Click con JS como respaldo si el click normal es interceptado
+        try {
+            click(btnFinalizarCompra);
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnFinalizarCompra);
+        }
+        //click(btnFinalizarCompra);
     }
 
     public void clickFinalCheckOut() throws Exception {
