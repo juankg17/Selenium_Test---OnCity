@@ -23,7 +23,7 @@ selenium_test:
     - chmod +x mvnw
   script:
     # Ejecutamos con el wrapper y los parámetros de CI
-    - ./mvnw clean test -Dtest=Selenium_Test.ReadExcelFileTest
+    - ./mvnw clean test -Dtest=Selenium_Test.SearchResult_Test
   artifacts:
     when: always
     paths:
