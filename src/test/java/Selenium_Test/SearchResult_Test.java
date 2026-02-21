@@ -97,6 +97,7 @@ public class SearchResult_Test extends TestBase{
     @Order(13)
     public void ingresarDatosEntrega() throws Exception {
         checkOutPage.ingresarInputcalle("Fray Justo");
+        checkOutPage.takeScreenshot("Calle");
         checkOutPage.ingresarInputNumCalle("4000");
         checkOutPage.ingresarInputNameDest("Pepe Lopez");
         checkOutPage.selectDropDownList("Ciudad Autónoma de Buenos Aires", checkOutPage.getSelectProvBtn());
