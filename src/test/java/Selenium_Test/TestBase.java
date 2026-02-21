@@ -17,7 +17,7 @@ public class TestBase {
 
     @BeforeAll
     public static void setUp(){
-        driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
+        driverManager = DriverManagerFactory.getManager(DriverType.CHROME_MAC);
         driver = driverManager.getDriver();
         //String filePath = new File("./src/test/resources/form/Prueba.html").getAbsolutePath();
         //driver.get(filePath);

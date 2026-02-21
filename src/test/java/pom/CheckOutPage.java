@@ -35,8 +35,6 @@ public class CheckOutPage extends BasePage{
         takeScreenshot("CHECKOUT");
         waitUntilVisibilityOfElement(btnFinalizarCompra);
 
-        // 3. Scroll forzado (Crucial en Checkout de VTEX)
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btnFinalizarCompra);
         waitUntilElementToBeClickable(btnFinalizarCompra);
 
         // 4. Click con JS como respaldo si el click normal es interceptado
@@ -47,7 +45,7 @@ public class CheckOutPage extends BasePage{
             click(btnFinalizarCompra);
             System.out.println("✅ Click en Finalizar Compra realizado.");
         } catch (Exception e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnFinalizarCompra);
+            //((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnFinalizarCompra);
             System.out.println("✅ Click en Finalizar Compra realizado vía JS.");
         }
         //click(btnFinalizarCompra);
@@ -101,9 +99,6 @@ public class CheckOutPage extends BasePage{
     public void ingresarInputcalle(String _inputCalle){
         waitUntilVisibilityOfElement(inputCalleLocator);
         type(_inputCalle, inputCalleLocator);
-        // 4. OPCIONAL: Si sigue fallando, forzar el valor con JavaScript
-        ((JavascriptExecutor) driver).executeScript("arguments[0].dispatchEvent(new Event('change'));", inputCalleLocator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].dispatchEvent(new Event('blur'));", inputCalleLocator);
     }
 
     public void ingresarInputNumCalle(String _inputNumCalle){
