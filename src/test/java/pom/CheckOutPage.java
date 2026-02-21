@@ -39,9 +39,6 @@ public class CheckOutPage extends BasePage{
 
         // 4. Click con JS como respaldo si el click normal es interceptado
         try {
-            if (getElements(btnContinuarEmail).size() > 0){
-                ingresarPreEmail(getPreEmailText());
-            }
             click(btnFinalizarCompra);
             System.out.println("✅ Click en Finalizar Compra realizado.");
         } catch (Exception e) {

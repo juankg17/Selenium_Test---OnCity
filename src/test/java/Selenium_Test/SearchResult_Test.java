@@ -99,6 +99,7 @@ public class SearchResult_Test extends TestBase{
         checkOutPage.ingresarInputcalle("Fray Justo");
         checkOutPage.ingresarInputNumCalle("4000");
         checkOutPage.ingresarInputNameDest("Pepe Lopez");
+        checkOutPage.ingresarInputcalle("Fray Justo");
         checkOutPage.selectDropDownList("Ciudad Autónoma de Buenos Aires", checkOutPage.getSelectProvBtn());
         checkOutPage.selectDropDownList("Ciudad Autónoma de Buenos Aires", checkOutPage.getSelectCityBtn());
         checkOutPage.clickBtnElijaFecha();
