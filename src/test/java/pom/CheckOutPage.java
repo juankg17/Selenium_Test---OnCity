@@ -29,7 +29,7 @@ public class CheckOutPage extends BasePage{
     private By dateToSelect = By.xpath("//div[@aria-label='day-20']");
     private By btnContinuarPago = By.id("btn-go-to-payment");
     //private By btnFinalizarCompra = By.xpath("//span[normalize-space()='Finalizar Compra']");
-    private By btnFinalizarCompra = By.xpath("//*[contains(@class, 'jsSubmitFakeButton')]");
+    private By btnFinalizarCompra = By.xpath("//button[contains(@class, 'jsSubmitFakeButton')]");
 
     public void clickFinalizarCompra() throws Exception {
         waitUntilVisibilityOfElement(btnFinalizarCompra);
@@ -37,6 +37,8 @@ public class CheckOutPage extends BasePage{
         // 3. Scroll forzado (Crucial en Checkout de VTEX)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btnFinalizarCompra);
         waitUntilElementToBeClickable(btnFinalizarCompra);
+
+        takeScreenshot("CHECKOUT");
 
         // 4. Click con JS como respaldo si el click normal es interceptado
         try {

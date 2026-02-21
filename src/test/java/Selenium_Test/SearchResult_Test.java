@@ -24,7 +24,7 @@ public class SearchResult_Test extends TestBase{
     @Order(2)
     public void searchProduct() throws InterruptedException {
         homePage.cerrarModalUbicacion();
-        homePage.takeScreenshot("HOME_START");
+        //homePage.takeScreenshot("HOME_START");
         homePage.searchProduct(homePage.getProductoSearch());
     }
 
