@@ -101,6 +101,9 @@ public class CheckOutPage extends BasePage{
     public void ingresarInputcalle(String _inputCalle){
         waitUntilVisibilityOfElement(inputCalleLocator);
         type(_inputCalle, inputCalleLocator);
+        // 4. OPCIONAL: Si sigue fallando, forzar el valor con JavaScript
+        ((JavascriptExecutor) driver).executeScript("arguments[0].dispatchEvent(new Event('change'));", inputCalleLocator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].dispatchEvent(new Event('blur'));", inputCalleLocator);
     }
 
     public void ingresarInputNumCalle(String _inputNumCalle){
