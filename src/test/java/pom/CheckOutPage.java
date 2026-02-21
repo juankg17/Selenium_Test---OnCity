@@ -20,7 +20,6 @@ public class CheckOutPage extends BasePage{
     private By inputPreNumber = By.id("client-phone1");
     private By inputNumber = By.id("client-phone3");
     private By btnContinuarEntrega = By.id("go-to-shipping");
-    private By inputCodPosLocator = By.id("ship-postalCode");
     private By inputCalleLocator = By.id("ship-street");
     private By inputNumCalleLocator = By.id("ship-number");
     private By inputNameDestLocator = By.id("ship-receiverName");
@@ -93,11 +92,6 @@ public class CheckOutPage extends BasePage{
 
     public By getSelectProvBtn(){ return selectProvBtn;}
     public By getSelectCityBtn(){return selectCityBtn;}
-
-    public void ingresarCodPos(String _inputCodPos){
-        waitUntilVisibilityOfElement(inputCodPosLocator);
-        type(_inputCodPos, inputCodPosLocator);
-    }
 
     public void ingresarInputcalle(String _inputCalle){
         waitUntilVisibilityOfElement(inputCalleLocator);

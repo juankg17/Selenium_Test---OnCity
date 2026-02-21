@@ -96,7 +96,6 @@ public class SearchResult_Test extends TestBase{
     @Test
     @Order(13)
     public void ingresarDatosEntrega() throws Exception {
-        checkOutPage.ingresarCodPos("1004");
         checkOutPage.ingresarInputcalle("Fray Justo");
         checkOutPage.ingresarInputNumCalle("4000");
         checkOutPage.ingresarInputNameDest("Pepe Lopez");
