@@ -29,19 +29,22 @@ public class CheckOutPage extends BasePage{
     private By dateToSelect = By.xpath("//div[@aria-label='day-20']");
     private By btnContinuarPago = By.id("btn-go-to-payment");
     //private By btnFinalizarCompra = By.xpath("//span[normalize-space()='Finalizar Compra']");
-    private By btnFinalizarCompra = By.xpath("//*[contains(@class, 'jsSubmitFakeButton btn btn-success btn-large btn-block')]");
+    private By btnFinalizarCompra = By.xpath("//*[contains(@class, 'jsSubmitFakeButton')]");
 
     public void clickFinalizarCompra() throws Exception {
         waitUntilVisibilityOfElement(btnFinalizarCompra);
 
         // 3. Scroll forzado (Crucial en Checkout de VTEX)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btnFinalizarCompra);
+        waitUntilElementToBeClickable(btnFinalizarCompra);
 
         // 4. Click con JS como respaldo si el click normal es interceptado
         try {
             click(btnFinalizarCompra);
+            System.out.println("✅ Click en Finalizar Compra realizado.");
         } catch (Exception e) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnFinalizarCompra);
+            System.out.println("✅ Click en Finalizar Compra realizado vía JS.");
         }
         //click(btnFinalizarCompra);
     }
