@@ -32,16 +32,18 @@ public class CheckOutPage extends BasePage{
     private By btnFinalizarCompra = By.xpath("//button[contains(@class, 'jsSubmitFakeButton')]");
 
     public void clickFinalizarCompra() throws Exception {
+        takeScreenshot("CHECKOUT");
         waitUntilVisibilityOfElement(btnFinalizarCompra);
 
         // 3. Scroll forzado (Crucial en Checkout de VTEX)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btnFinalizarCompra);
         waitUntilElementToBeClickable(btnFinalizarCompra);
 
-        takeScreenshot("CHECKOUT");
-
         // 4. Click con JS como respaldo si el click normal es interceptado
         try {
+            if (getElements(btnContinuarEmail).size() > 0){
+                ingresarPreEmail(getPreEmailText());
+            }
             click(btnFinalizarCompra);
             System.out.println("✅ Click en Finalizar Compra realizado.");
         } catch (Exception e) {
