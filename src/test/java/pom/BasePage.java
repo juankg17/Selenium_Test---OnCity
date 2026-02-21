@@ -114,6 +114,7 @@ public class BasePage {
         }
         element.clear();
         element.sendKeys(input);
+        element.sendKeys(Keys.TAB);
         //driver.findElement(locator).sendKeys(input);
     }
 
