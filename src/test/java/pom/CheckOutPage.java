@@ -96,6 +96,7 @@ public class CheckOutPage extends BasePage{
     public void ingresarInputcalle(String _inputCalle){
         waitUntilVisibilityOfElement(inputCalleLocator);
         type(_inputCalle, inputCalleLocator);
+        waitUntilAtributeToBe(inputCalleLocator, _inputCalle, _inputCalle);
     }
 
     public void ingresarInputNumCalle(String _inputNumCalle){
