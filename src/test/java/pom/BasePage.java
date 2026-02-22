@@ -100,6 +100,11 @@ public class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void waitUntilElementContainsString(By locator, String _expectedText){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBe(locator,_expectedText));
+    }
+
     public void type(String input, By locator){
         waitUntilVisibilityOfElement(locator);
         waitUntilElementToBeClickable(locator);
@@ -114,7 +119,9 @@ public class BasePage {
         }
         element.clear();
         element.sendKeys(input);*/
+        driver.findElement(locator).clear(); // Limpiamos el textbox para evitar concatenar texto
         driver.findElement(locator).sendKeys(input);
+        waitUntilElementContainsString(locator, input);
     }
 
     public void takeScreenshot(String name) {
