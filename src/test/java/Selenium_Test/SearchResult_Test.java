@@ -98,7 +98,7 @@ public class SearchResult_Test extends TestBase{
     public void ingresarDatosEntrega() throws Exception {
         checkOutPage.ingresarInputcalle("Fray Justo");
         checkOutPage.takeScreenshot("Calle");
-        //checkOutPage.ingresarInputcalle("Fray Justo");
+        checkOutPage.ingresarInputcalle("Fray Justo");
         checkOutPage.takeScreenshot("Calle 2");
         checkOutPage.ingresarInputNumCalle("4000");
         checkOutPage.ingresarInputNameDest("Pepe Lopez");
