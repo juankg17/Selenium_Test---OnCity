@@ -93,10 +93,13 @@ public class CheckOutPage extends BasePage{
     public By getSelectProvBtn(){ return selectProvBtn;}
     public By getSelectCityBtn(){return selectCityBtn;}
 
-    public void ingresarInputcalle(String _inputCalle){
+    public void ingresarInputcalle(String _inputCalle) throws Exception {
         waitUntilVisibilityOfElement(inputCalleLocator);
         type(_inputCalle, inputCalleLocator);
-        waitUntilAtributeToBe(inputCalleLocator, _inputCalle, _inputCalle);
+        //waitUntilAtributeToBe(inputCalleLocator, _inputCalle, _inputCalle);
+        if (!getText(inputCalleLocator).equals(_inputCalle)){
+            type(_inputCalle, inputCalleLocator);
+        }
     }
 
     public void ingresarInputNumCalle(String _inputNumCalle){

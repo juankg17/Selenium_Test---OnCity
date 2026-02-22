@@ -101,7 +101,7 @@ public class BasePage {
     }
 
     public void waitUntilAtributeToBe(By locator, String _expectedText, String _inputText){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.attributeToBe(locator,_expectedText,_inputText));
     }
 
