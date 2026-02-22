@@ -103,7 +103,7 @@ public class BasePage {
     public void type(String input, By locator){
         waitUntilVisibilityOfElement(locator);
         waitUntilElementToBeClickable(locator);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
         // 2. Ahora sí, usamos el 'element' (no el 'locator') en el JavaScript
@@ -113,8 +113,8 @@ public class BasePage {
             System.out.println("No se pudo dar foco con JS, intentando normal...");
         }
         element.clear();
-        element.sendKeys(input);
-        //driver.findElement(locator).sendKeys(input);
+        element.sendKeys(input);*/
+        driver.findElement(locator).sendKeys(input);
     }
 
     public void takeScreenshot(String name) {
